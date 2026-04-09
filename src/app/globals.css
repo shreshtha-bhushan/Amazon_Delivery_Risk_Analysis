@@ -47,7 +47,7 @@
   --popover-foreground: #ffffff;
   --primary: #FF9900;
   --primary-foreground: #ffffff;
-  --secondary: #146EB4;
+  --secondary: #333333;
   --secondary-foreground: #ffffff;
   --muted: #141414;
   --muted-foreground: #a0a0a0;
@@ -57,20 +57,49 @@
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.08);
   --input: rgba(255, 255, 255, 0.08);
-  --ring: rgba(255, 153, 0, 0.5); /* Orange focus */
+  --ring: rgba(255, 153, 0, 0.5);
   --radius: 0.75rem;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    letter-spacing: -0.015em; /* SF pro tight tracking */
+    letter-spacing: -0.015em;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-amazon-orange selection:text-white;
+    @apply bg-background text-foreground antialiased;
   }
-  input[type="range"] {
-    -webkit-appearance: none;
-    background: transparent;
-  }
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Hide scrollbar for pill selectors */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Orange-toned emoji — grayscale → sepia → push to Amazon orange */
+.emoji-mono {
+  display: inline-block;
+  -webkit-filter: grayscale(1) sepia(1) saturate(6) hue-rotate(-30deg) brightness(1.05);
+  filter: grayscale(1) sepia(1) saturate(6) hue-rotate(-30deg) brightness(1.05);
+  opacity: 0.9;
 }
